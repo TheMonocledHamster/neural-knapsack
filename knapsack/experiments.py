@@ -2,7 +2,7 @@ import json
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-import knapsack_commons as kc
+import commons
 
 # parameters for running:
 results_dir = './results/t0.005_seed257/'
@@ -26,7 +26,7 @@ def experiments(results_dir):
     for pstar in pstars:
         for width in widths:
             seed = prime_for_seed * pstar + width
-            result = kc.one_experiment(seed, pstar, width, reg, batch_size, steps_per_epoch, epochs, patience, verbose, eval_n)
+            result = commons.one_experiment(seed, pstar, width, reg, batch_size, steps_per_epoch, epochs, patience, verbose, eval_n)
             results.append(result)
             with open(results_filename, 'w') as fout:
                 json.dump(results, fout, indent = 4)

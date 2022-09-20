@@ -1,4 +1,4 @@
-import knapsack_commons as kc
+import commons
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -26,7 +26,7 @@ def extract_pstar_width_function(results, threshold):
     function = dict(sorted(function.items()))
     return list(function.keys()), list(function.values())
     
-results = kc.read_results(filename)
+results = commons.read_results(filename)
 if use_toy_data:
     pstars, widths = toy_data_x, toy_data_y
 else:
@@ -36,7 +36,7 @@ if throw_away_end > 0:
     pstars, widths = pstars[:-throw_away_end], widths[:-throw_away_end]
 fig, ax = plt.subplots()
 ax.plot(pstars, widths, 'ok', label='Observations')
-params = kc.perform_lin_reg(pstars, widths, degree)
+params = commons.perform_lin_reg(pstars, widths, degree)
 if plot_reg_line:
     x = np.arange(min(pstars), max(pstars)+1)
     y = params[0] + params[1]*x
